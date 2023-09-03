@@ -1,5 +1,6 @@
 FROM php:8.2 as build
 
+COPY . .
 RUN php build.php
 
 FROM nginx:alpine as nginx-prod
