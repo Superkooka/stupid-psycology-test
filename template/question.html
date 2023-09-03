@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="asset/style.css">
     <title>Stupid Test</title>
 </head>
-<body class="bg-slate-100 p-4">
-    <h1 class="my-4 mb-8 text-3xl font-semibold w-full">Stupid psycology test.</h1>
-    <div id="question-container" class="border rounded m-4 py-4 px-8 w-2/3 border-gray-300 flex flex-col justify-center">
+<body class="p-4 bg-slate-100">
+    <h1 class="w-full my-4 mb-8 text-3xl font-semibold hover:underline"><a href="/index.html">Stupid psycology test.</a></h1>
+    <div id="question-container" class="flex flex-col justify-center w-2/3 px-8 py-4 m-4 border border-gray-300 rounded">
         <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME##</h2>
 
         <p id="question" class="my-4 text-xl" data-weight="placeholder">placeholder</p>
 
-        <div class="ml-4 my-8 flex gap-6 place-items-center">
+        <div class="flex gap-6 my-8 ml-4 place-items-center">
             <span class="font-semibold text-xl text-[#88619a]">Pas d'accord</span>
             <input type="radio" name="choice" value="-3" class="appearance-none transition rounded-full border-[#88619a] h-16 w-16 border-[3px] hover:bg-[#88619a] checked:bg-[#88619a]"></input>
             <input type="radio" name="choice" value="-2" class="appearance-none transition rounded-full border-[#88619a] h-14 w-14 border-[3px] hover:bg-[#88619a] checked:bg-[#88619a]"></input>
@@ -26,15 +26,15 @@
         </div>
 
         <div class="flex justify-end">
-            <button id="continue" class="border rounded px-4 py-2 my-4 border-gray-400 w-36">
+            <button id="continue" class="px-4 py-2 my-4 border border-gray-400 rounded w-36">
                 Continuer
             </button>
         </div>
     </div>
 
-    <div id="result-container" class="hidden border rounded m-4 py-4 px-8 w-2/3 border-gray-300 flex flex-col justify-center">
+    <div id="result-container" class="flex flex-col justify-center hidden w-2/3 px-8 py-4 m-4 border border-gray-300 rounded">
         <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME## - Résultat</h2>
-        <h3 class="text-xl my-2">Vous êtes <span id="result" class="font-semibold">Communiste</span> !</h3>
+        <h3 class="my-2 text-xl">Vous êtes <span id="result" class="font-semibold">Communiste</span> !</h3>
         <p id="result-desc">long desc</p>
     </div>
 
