@@ -25,9 +25,7 @@ file_put_contents("build/index.html", $homepage_file);
 
 $question_template = file_get_contents("template/question.html");
 foreach ($quizz as $quiz) {
-  foreach ($quiz["questions"] as $question) {
-    $question_file = str_replace("##QUIZ_NAME##", $quiz["name"], $question_template);
-
-    file_put_contents(sprintf("build/%s.html", $quiz["slug"]), $question_file);
-  }
+  $question_file = str_replace("##QUIZ_NAME##", $quiz["name"], $question_template);
+  $question_file = str_replace("##QUESTIONS_JS_OBJECTS##", implode(",", array_map(fn ($question) => sprintf("{name: '%s', weight: %d}", htmlentities($question["name"]), $question["weight"]), $quiz["questions"])), $question_file);
+  file_put_contents(sprintf("build/%s.html", $quiz["slug"]), $question_file);
 }
