@@ -9,7 +9,7 @@
 <body class="p-4 bg-slate-100">
     <h1 class="w-full my-4 mb-8 text-3xl font-semibold hover:underline"><a href="/index.html">Stupid psycology test.</a></h1>
     <div id="question-container" class="flex flex-col justify-center w-2/3 px-8 py-4 m-4 border border-gray-300 rounded">
-        <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME##</h2>
+        <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME## - <span id="page">0/0</span></h2>
 
         <p id="question" class="my-4 text-xl" data-weight="placeholder">placeholder</p>
 
@@ -45,6 +45,7 @@
 
         const questionContainer = document.getElementById("question-container")
         const resultContainer = document.getElementById("result-container")
+        const page = document.getElementById("page")
 
         const choices = document.getElementsByName("choice")
         const continueBtn = document.getElementById("continue")
@@ -55,6 +56,7 @@
 
         questionText.innerHTML = questions[0].name
         questionText.dataset.weight = questions[0].weight
+        page.textContent = `${anwsers.length + 1}/${questions.length}`
 
         continueBtn.addEventListener("click", (e) => {
             e.preventDefault()
@@ -73,6 +75,7 @@
             }
 
             anwsers.push({score: anwser, weight: questionWeight})
+            page.textContent = `${anwsers.length + 1}/${questions.length}`
 
             if (anwsers.length < questions.length) {
                 let question = questions[anwsers.length]
