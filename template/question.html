@@ -7,8 +7,8 @@
 </head>
 <body class="bg-slate-100 p-4">
     <h1 class="my-4 mb-8 text-3xl font-semibold w-full">Stupid psycology test.</h1>
-    <div class="border rounded m-4 py-4 px-8 w-2/3 border-gray-300 flex flex-col justify-center">
-        <h2 id="quizName" class="my-4 text-2xl font-semibold">##QUIZ_NAME##</h2>
+    <div id="question-container" class="border rounded m-4 py-4 px-8 w-2/3 border-gray-300 flex flex-col justify-center">
+        <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME##</h2>
 
         <p id="question" class="my-4 text-xl" data-weight="placeholder">placeholder</p>
 
@@ -31,14 +31,27 @@
         </div>
     </div>
 
+    <div id="result-container" class="hidden border rounded m-4 py-4 px-8 w-2/3 border-gray-300 flex flex-col justify-center">
+        <h2 class="my-4 text-2xl font-semibold">##QUIZ_NAME## - Résultat</h2>
+        <h3 class="text-xl my-2">Vous êtes <span id="result" class="font-semibold">Communiste</span> !</h3>
+        <p id="result-desc">long desc</p>
+    </div>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         const questions = [##QUESTIONS_JS_OBJECTS##]
+        const results = ##RESULTS_JS_OBJECT##
         const anwsers = []
+
+        const questionContainer = document.getElementById("question-container")
+        const resultContainer = document.getElementById("result-container")
 
         const choices = document.getElementsByName("choice")
         const continueBtn = document.getElementById("continue")
         const questionText = document.getElementById("question")
+
+        const resultText = document.getElementById("result")
+        const resultDesc = document.getElementById("result-desc")
 
         questionText.innerHTML = questions[0].name
         questionText.dataset.weight = questions[0].weight
@@ -59,16 +72,29 @@
                 return // No radio checked
             }
 
-
             anwsers.push({score: anwser, weight: questionWeight})
 
             if (anwsers.length < questions.length) {
                 let question = questions[anwsers.length]
                 questionText.innerHTML = question.name
                 questionText.dataset.weight = question.weight
-            }
+            } else {
+                questionContainer.classList.add("hidden")
+                resultContainer.classList.remove("hidden")
 
-            console.log(anwsers)
+                const finalScore = anwsers.reduce((sum, item) => sum + item.score * item.weight, 0)
+                
+                if (finalScore > 2) {
+                    resultText.innerHTML = results.agree.name
+                    resultDesc.innerHTML = results.agree.desc
+                } else if (finalScore < -2) {
+                    resultText.innerHTML = results.disagree.name
+                    resultDesc.innerHTML = results.disagree.desc
+                } else {
+                    resultText.innerHTML = results.neutral.name
+                    resultDesc.innerHTML = results.neutral.desc
+                }
+            }
         })
 
     </script>

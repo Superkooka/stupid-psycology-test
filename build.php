@@ -27,5 +27,6 @@ $question_template = file_get_contents("template/question.html");
 foreach ($quizz as $quiz) {
   $question_file = str_replace("##QUIZ_NAME##", $quiz["name"], $question_template);
   $question_file = str_replace("##QUESTIONS_JS_OBJECTS##", implode(",", array_map(fn ($question) => sprintf("{name: '%s', weight: %d}", htmlentities($question["name"]), $question["weight"]), $quiz["questions"])), $question_file);
+  $question_file = str_replace("##RESULTS_JS_OBJECT##", sprintf("{agree: {name: '%s', desc: '%s'}, neutral: {name: '%s', desc: '%s'}, disagree: {name: '%s', desc: '%s'}}", $quiz["results"]["agree"]["name"], $quiz["results"]["agree"]["desc"], $quiz["results"]["neutral"]["name"],$quiz["results"]["neutral"]["desc"], $quiz["results"]["disagree"]["name"], $quiz["results"]["disagree"]["desc"]), $question_file);
   file_put_contents(sprintf("build/%s.html", $quiz["slug"]), $question_file);
 }
