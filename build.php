@@ -11,6 +11,8 @@ if (is_dir("build/")) {
 
 mkdir("build/");
 
+exec("cp -R asset/ build/"); // sry
+
 $quizzHtmlList = "";
 foreach ($quizz as $quiz) {
   $quizzHtmlList .= sprintf(<<<HTML
